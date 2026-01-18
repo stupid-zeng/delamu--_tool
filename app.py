@@ -8,28 +8,50 @@ import io
 st.set_page_config(page_title="外协调拨系统(倩文)", layout="wide", page_icon="🔒")
 
 # ==========================================
-# 2. 核心隐私保护代码 (隐藏菜单和页脚)
-
+# ==========================================
+# 2. 核心隐私保护代码 (核弹级隐藏)
 # ==========================================
 hide_st_style = """
     <style>
-    /* 隐藏右上角汉堡菜单 */
+    /* 1. 隐藏顶部的汉堡菜单 */
     #MainMenu {visibility: hidden;}
     
-    /* 隐藏页脚 (Made with Streamlit) */
+    /* 2. 隐藏页脚 "Made with Streamlit" */
     footer {visibility: hidden;}
     
-    /* 隐藏顶部彩色条 */
+    /* 3. 隐藏顶部的彩色装饰条 */
     header {visibility: hidden;}
     
-    /* 【关键】隐藏右下角的开发者工具栏/头像 */
-    .stApp > header {display: none;}
-    div[data-testid="stToolbar"] {visibility: hidden; height: 0%; position: fixed;}
-    div[data-testid="stDecoration"] {visibility: hidden; height: 0%; position: fixed;}
-    div[data-testid="stStatusWidget"] {visibility: hidden; height: 0%; position: fixed;}
+    /* 4. 暴力隐藏右下角的 Streamlit 工具栏 */
+    /* 针对新版 Shadow DOM 的隐藏 */
+    [data-testid="stToolbar"] {
+        visibility: hidden !important;
+        display: none !important;
+        height: 0px !important;
+    }
     
-    /* 针对新版 Streamlit 的额外隐藏规则 */
-    [data-testid="stToolbar"] {display: none !important;}
+    /* 针对旧版结构的隐藏 */
+    .stApp > header {
+        visibility: hidden !important;
+        display: none !important;
+    }
+    
+    /* 隐藏状态组件 */
+    div[data-testid="stStatusWidget"] {
+        visibility: hidden !important;
+        display: none !important;
+    }
+    
+    /* 隐藏头像框 */
+    [data-testid="stDecoration"] {
+        visibility: hidden !important;
+        display: none !important;
+    }
+
+    /* 5. 调整主区域上边距，防止顶部留白 */
+    .block-container {
+        padding-top: 1rem !important;
+    }
     </style>
     """
 st.markdown(hide_st_style, unsafe_allow_html=True)
