@@ -5,18 +5,33 @@ import io
 # ==========================================
 # 1. 页面基础配置 (必须是第一个 st 命令)
 # ==========================================
-st.set_page_config(page_title="外协调拨系统(隐私版)", layout="wide", page_icon="🔒")
+st.set_page_config(page_title="外协调拨系统(倩文)", layout="wide", page_icon="🔒")
 
 # ==========================================
 # 2. 核心隐私保护代码 (隐藏菜单和页脚)
+
 # ==========================================
 hide_st_style = """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            </style>
-            """
+    <style>
+    /* 隐藏右上角汉堡菜单 */
+    #MainMenu {visibility: hidden;}
+    
+    /* 隐藏页脚 (Made with Streamlit) */
+    footer {visibility: hidden;}
+    
+    /* 隐藏顶部彩色条 */
+    header {visibility: hidden;}
+    
+    /* 【关键】隐藏右下角的开发者工具栏/头像 */
+    .stApp > header {display: none;}
+    div[data-testid="stToolbar"] {visibility: hidden; height: 0%; position: fixed;}
+    div[data-testid="stDecoration"] {visibility: hidden; height: 0%; position: fixed;}
+    div[data-testid="stStatusWidget"] {visibility: hidden; height: 0%; position: fixed;}
+    
+    /* 针对新版 Streamlit 的额外隐藏规则 */
+    [data-testid="stToolbar"] {display: none !important;}
+    </style>
+    """
 st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # ==========================================
